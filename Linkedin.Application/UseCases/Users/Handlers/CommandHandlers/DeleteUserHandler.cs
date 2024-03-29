@@ -21,7 +21,10 @@ namespace Linkedin.Application.UseCases.Users.Handlers.CommandHandlers
                      return Task.FromResult(false);
             }
 
-            _context.Users.Remove(DeletingUser);
+            DeletingUser.IsDeleted = true;
+            DeletingUser.DeletedDate = DateTime.UtcNow;
+
+            _context.Users.Update(DeletingUser);
             _context.SaveChangesAsync(cancellationToken);
 
             return Task.FromResult(true);
