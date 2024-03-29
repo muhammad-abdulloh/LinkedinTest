@@ -32,5 +32,13 @@ namespace Linkedin.API.Controllers
 
             return Ok(result);
         }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteUser(Guid id)
+        {
+            var result = await _mediator.Send(new DeleteUserCommand { Id = id });
+
+            return Ok(result);
+        }
     }
 }
